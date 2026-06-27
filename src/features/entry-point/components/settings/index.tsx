@@ -1,6 +1,7 @@
 import ExportSettings from "./export";
 import PerkLimit from "./perk-limit";
 import StarterClassSettings from "./starter-class";
+import DebugSettings from "./debug-settings";
 
 export default function Settings() {
   return (
@@ -8,6 +9,7 @@ export default function Settings() {
       <StarterClassSettings />
       <PerkLimit />
       <ExportSettings />
+      <DebugSettings />
     </div>
   );
 }
