@@ -17,7 +17,7 @@ export const createShareSlice: StateCreator<
   [],
   ShareSlice
 > = (set): ShareSlice => ({
-  withBackground: false,
+  withBackground: true,
   showPreview: false,
   isCacheInitialized: false,
 
@@ -36,4 +36,3 @@ export const createShareSlice: StateCreator<
       state.isCacheInitialized = value;
     }),
 });
-
