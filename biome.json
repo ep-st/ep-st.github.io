@@ -1,0 +1,63 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.5.12/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"includes": ["**", "!!**/dist", "!src/shared/components/ui"]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab"
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"preset": "all",
+			"nursery": {
+				"recommended": true,
+				"useSortedClasses": "error"
+			},
+			"suspicious": {
+				"noReactSpecificProps": "off"
+			},
+			"correctness": {
+				"useImportExtensions": "off",
+				"useQwikValidLexicalScope": "off",
+				"noSolidDestructuredProps": "off"
+			},
+			"performance": {
+				"noImgElement": "off",
+				"useSolidForComponent": "off"
+			},
+			"style": {
+				"noJsxLiterals": "off",
+				"noContinue": "off",
+				"noTernary": "off",
+				"noNestedTernary": "off",
+				"noIncrementDecrement": "off",
+				"noEnum": "off"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double"
+		}
+	},
+	"assist": {
+		"enabled": true,
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
+	},
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
+		}
+	}
+}

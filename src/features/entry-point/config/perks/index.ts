@@ -4,8 +4,8 @@ import { uniques } from "./uniques";
 import { weaponMasteries } from "./weapon-masteries";
 
 export const Perks = {
-  ...classes,
-  ...weaponMasteries,
-  ...uniques,
-  ...minors,
+	...classes,
+	...weaponMasteries,
+	...uniques,
+	...minors,
 } as const;
