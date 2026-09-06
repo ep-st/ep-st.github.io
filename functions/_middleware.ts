@@ -65,5 +65,6 @@ export const onRequest: PagesFunction = async ({ request, next }) => {
 			...Object.fromEntries(response.headers),
 			"content-type": "text/html;charset=UTF-8",
 		},
+		// biome-ignore lint/suspicious/noExplicitAny: just work please
 	}) as any;
 };

@@ -49,13 +49,13 @@ export function UrlSync() {
 		if (String(rootNodeQuery) !== lastSyncedClass.current) {
 			lastSyncedClass.current = String(rootNodeQuery);
 
-			const starterClass = `${rootNodeQuery}`;
+			const starterClassId = `${rootNodeQuery}`;
 
-			if (!unlockedQuery.has(starterClass)) {
-				setUnlocked(new Set([starterClass]));
+			if (!unlockedQuery.has(starterClassId)) {
+				setUnlocked(new Set([starterClassId]));
 			}
 
-			setRootNode(starterClass as RootNode);
+			setRootNode(starterClassId as RootNode);
 		}
 		if (!areSetsEqual(unlockedQuery, lastSyncedNodes.current)) {
 			lastSyncedNodes.current = unlockedQuery;

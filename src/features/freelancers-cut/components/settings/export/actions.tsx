@@ -1,3 +1,5 @@
+/** biome-ignore-all lint/performance/noJsxPropsBind: It's insignificant */
+
 import { Check, Copy, Download } from "lucide-react";
 import { useEffect, useState } from "react";
 import { initCache } from "@/features/freelancers-cut/config/image-cache";

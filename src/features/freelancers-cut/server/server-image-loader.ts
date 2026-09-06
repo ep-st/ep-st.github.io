@@ -13,29 +13,25 @@ export async function loadServerImages(
 	const uniqueIcons = Array.from(new Set(entries.map((e) => e.perk.icon)));
 
 	const promises = uniqueIcons.map(async (iconPath) => {
-		try {
-			// Ensure iconPath is a full URL or relative to origin
-			const url = iconPath.startsWith("http")
-				? iconPath
-				: `${origin}${iconPath}`;
-			const response = await fetch(url);
-			if (!response.ok) {
-				throw new Error(`Failed to fetch ${url}`);
-			}
+		// Ensure iconPath is a full URL or relative to origin
+		const url = iconPath.startsWith("http") ? iconPath : `${origin}${iconPath}`;
+		const response = await fetch(url);
+		if (!response.ok) {
+			throw new Error(`Failed to fetch ${url}`);
+		}
 
-			const arrayBuffer = await response.arrayBuffer();
-			const bytes = new Uint8Array(arrayBuffer);
-			let binary = "";
-			for (let i = 0; i < bytes.byteLength; i++) {
-				binary += String.fromCharCode(bytes[i]);
-			}
-			const base64 = btoa(binary);
+		const arrayBuffer = await response.arrayBuffer();
+		const bytes = new Uint8Array(arrayBuffer);
+		let binary = "";
+		for (let i = 0; i < bytes.byteLength; i++) {
+			binary += String.fromCharCode(bytes[i]);
+		}
+		const base64 = btoa(binary);
 
-			const mimeType = iconPath.endsWith(".png") ? "image/png" : "image/webp";
-			const dataUrl = `data:${mimeType};base64,${base64}`;
+		const mimeType = iconPath.endsWith(".png") ? "image/png" : "image/webp";
+		const dataUrl = `data:${mimeType};base64,${base64}`;
 
-			SERVER_IMAGE_CACHE.set(iconPath, dataUrl);
-		} catch {}
+		SERVER_IMAGE_CACHE.set(iconPath, dataUrl);
 	});
 
 	await Promise.all(promises);

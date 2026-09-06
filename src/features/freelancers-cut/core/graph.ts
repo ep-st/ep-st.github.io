@@ -1,39 +1,42 @@
 import { CONNECTIONS } from "@/features/freelancers-cut/config/connections";
-import * as graph from "@/shared/graph";
+import {
+	buildAdjacencyList,
+	getDisconnectedNodes as graphGetDisconnectedNodes,
+	isAdjacentToUnlocked as graphIsAdjacentToUnlocked,
+	reachableNodes as graphReachableNodes,
+	shortestPath as graphShortestPath,
+	wouldDisconnect as graphWouldDisconnect,
+	shortestValidPath,
+} from "@/shared/graph";
 import { withAdjacency } from "@/shared/withAdjacency";
 import { canUnlockNode } from "./can-unlock-node";
 
-export const ADJACENCY_LIST = graph.buildAdjacencyList(CONNECTIONS);
-
-export namespace FreelancersCutGraph {
-	export const shortestPath = withAdjacency(ADJACENCY_LIST, graph.shortestPath);
-	export const reachableNodes = withAdjacency(
+function pathToClosestUnlocked(
+	nodeId: string,
+	unlockedNodes: Set<string>,
+	perkLimit: number,
+) {
+	return shortestValidPath(
 		ADJACENCY_LIST,
-		graph.reachableNodes,
+		unlockedNodes,
+		nodeId,
+		(current, id) => canUnlockNode(current, perkLimit, id),
 	);
-	export const wouldDisconnect = withAdjacency(
-		ADJACENCY_LIST,
-		graph.wouldDisconnect,
-	);
-	export const isAdjacentToUnlocked = withAdjacency(
-		ADJACENCY_LIST,
-		graph.isAdjacentToUnlocked,
-	);
-	export const getDisconnectedNodes = withAdjacency(
-		ADJACENCY_LIST,
-		graph.getDisconnectedNodes,
-	);
-
-	export function pathToClosestUnlocked(
-		nodeId: string,
-		unlockedNodes: Set<string>,
-		perkLimit: number,
-	) {
-		return graph.shortestValidPath(
-			ADJACENCY_LIST,
-			unlockedNodes,
-			nodeId,
-			(current, id) => canUnlockNode(current, perkLimit, id),
-		);
-	}
 }
+
+export const ADJACENCY_LIST = buildAdjacencyList(CONNECTIONS);
+
+export const FreelancersCutGraph = {
+	shortestPath: withAdjacency(ADJACENCY_LIST, graphShortestPath),
+	reachableNodes: withAdjacency(ADJACENCY_LIST, graphReachableNodes),
+	wouldDisconnect: withAdjacency(ADJACENCY_LIST, graphWouldDisconnect),
+	isAdjacentToUnlocked: withAdjacency(
+		ADJACENCY_LIST,
+		graphIsAdjacentToUnlocked,
+	),
+	getDisconnectedNodes: withAdjacency(
+		ADJACENCY_LIST,
+		graphGetDisconnectedNodes,
+	),
+	pathToClosestUnlocked,
+};
