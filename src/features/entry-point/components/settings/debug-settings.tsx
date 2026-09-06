@@ -31,6 +31,7 @@ function DebugToggle({ option }: { option: DebugOption }) {
 			</span>
 			<button
 				type="button"
+				// biome-ignore lint/performance/noJsxPropsBind: It's insignificant
 				onClick={() => setChecked(!checked)}
 				className={cn(
 					"relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors duration-200",
