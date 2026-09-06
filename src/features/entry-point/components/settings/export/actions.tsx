@@ -3,6 +3,7 @@
 import { Check, Copy, Download } from "lucide-react";
 import { useEffect, useState } from "react";
 import { initCache } from "@/features/entry-point/config/image-cache";
+import { EXPORT_COPY_DEBOUNCE_MS } from "@/features/entry-point/constants";
 import { useEntryPointStore } from "@/features/entry-point/store";
 import { selectExportUrl } from "@/features/entry-point/store/selectors/select-export-url";
 import { selectUnlockedClassPerks } from "@/features/entry-point/store/selectors/select-perks";
@@ -33,8 +34,7 @@ export function ExportActions() {
 		if (success) {
 			setCopied(true);
 
-			// biome-ignore lint/style/noMagicNumbers: no
-			setTimeout(() => setCopied(false), 2 * 1000);
+			setTimeout(() => setCopied(false), EXPORT_COPY_DEBOUNCE_MS);
 		}
 	};
 

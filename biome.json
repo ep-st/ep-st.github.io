@@ -6,7 +6,7 @@
 		"useIgnoreFile": true
 	},
 	"files": {
-		"includes": ["**", "!!**/dist", "!src/shared/components/ui"]
+		"includes": ["**", "!!**/dist", "!src/shared/components/ui", "!public/"]
 	},
 	"formatter": {
 		"enabled": true,
@@ -21,7 +21,13 @@
 				"useSortedClasses": "error"
 			},
 			"suspicious": {
-				"noReactSpecificProps": "off"
+				"noReactSpecificProps": "off",
+				"noEmptySource": {
+					"level": "on",
+					"options": {
+						"allowComments": true
+					}
+				}
 			},
 			"correctness": {
 				"useImportExtensions": "off",
@@ -59,5 +65,48 @@
 		"parser": {
 			"tailwindDirectives": true
 		}
-	}
+	},
+
+	"overrides": [
+		{
+			"includes": ["src/features/entry-point/**"],
+			"linter": {
+				"rules": {
+					"style": {
+						"noRestrictedImports": {
+							"level": "error",
+							"options": {
+								"patterns": [
+									{
+										"group": ["**/features/freelancers-cut/**"],
+										"message": "Entry Point may not import from Freelancer's Cut"
+									}
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		{
+			"includes": ["src/features/freelancers-cut/**"],
+			"linter": {
+				"rules": {
+					"style": {
+						"noRestrictedImports": {
+							"level": "error",
+							"options": {
+								"patterns": [
+									{
+										"group": ["**/features/entry-point/**"],
+										"message": "Freelancer's Cut may not import from Entry Point"
+									}
+								]
+							}
+						}
+					}
+				}
+			}
+		}
+	]
 }

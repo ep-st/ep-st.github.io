@@ -1,7 +1,9 @@
+import { useCallback } from "react";
 import { handleClick } from "@/features/entry-point/core/handle-click";
 import { useEntryPointStore } from "@/features/entry-point/store";
 import { selectSelectedNodes } from "@/features/entry-point/store/selectors/select-selected-nodes";
 import type { PerkEntry } from "@/features/entry-point/types";
+import { DEBUG_NODE_ID_DOWNSCALE } from "../../constants";
 
 interface Props {
 	perkEntry: PerkEntry;
@@ -18,6 +20,18 @@ export function PerkNode({ perkEntry, id }: Props) {
 	const setHoveredNode = useEntryPointStore((store) => store.setHoveredNode);
 	const showNodeIds = useEntryPointStore((store) => store.showNodeIds);
 
+	const clickCallback = useCallback(() => {
+		handleClick(id);
+	}, [id]);
+
+	const mouseEnterCallback = useCallback(() => {
+		setHoveredNode(id);
+	}, [id, setHoveredNode]);
+
+	const mouseLeaveCallback = useCallback(() => {
+		setHoveredNode(null);
+	}, [setHoveredNode]);
+
 	const filter = isSelected
 		? "url(#selected)"
 		: isUnlocked
@@ -26,8 +40,7 @@ export function PerkNode({ perkEntry, id }: Props) {
 
 	return (
 		<>
-			{/* TODO: fix that vv */}
-			{/** biome-ignore lint/a11y/noStaticElementInteractions: gotta fix that soon */}
+			{/** biome-ignore lint/a11y/noStaticElementInteractions: I need the image to be interactive */}
 			<image
 				width={size}
 				height={size}
@@ -36,19 +49,9 @@ export function PerkNode({ perkEntry, id }: Props) {
 				href={perkEntry.perk.icon}
 				filter={filter}
 				style={{ cursor: "pointer", pointerEvents: "auto" }}
-				// TODO: make biome happy (optionally)
-				// biome-ignore lint/performance/noJsxPropsBind: biome doesn't like it
-				onClick={() => {
-					handleClick(id);
-				}}
-				// biome-ignore lint/performance/noJsxPropsBind: biome doesn't like it
-				onMouseEnter={() => {
-					setHoveredNode(id);
-				}}
-				// biome-ignore lint/performance/noJsxPropsBind: biome doesn't like it
-				onMouseLeave={() => {
-					setHoveredNode(null);
-				}}
+				onClick={clickCallback}
+				onMouseEnter={mouseEnterCallback}
+				onMouseLeave={mouseLeaveCallback}
 			>
 				<title>{perkEntry.perk.description}</title>
 			</image>
@@ -59,9 +62,7 @@ export function PerkNode({ perkEntry, id }: Props) {
 					textAnchor="middle"
 					dominantBaseline="middle"
 					fill="red"
-					//TODO: make this a constant somewhere vv
-					// biome-ignore lint/style/noMagicNumbers: maybe
-					fontSize={perkEntry.coordinates.z * 0.9}
+					fontSize={perkEntry.coordinates.z * DEBUG_NODE_ID_DOWNSCALE}
 					style={{ pointerEvents: "none" }}
 				>
 					{id}

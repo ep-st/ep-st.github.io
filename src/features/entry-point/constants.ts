@@ -6,6 +6,7 @@ export const DEFAULT_PERK_LIMIT = 75 as const;
 export const EXPORT_CANVAS_WIDTH = 700 as const;
 export const EXPORT_CANVAS_HEIGHT = 700 as const;
 export const EXPORT_CANVAS_SCALE = 2 as const;
+export const EXPORT_COPY_DEBOUNCE_MS = 2000 as const;
 
 export const EDITOR_UNLOCKED_PATH_WIDTH = 1.5 as const;
 export const EDITOR_LOCKED_PATH_WIDTH = 0.5 as const;

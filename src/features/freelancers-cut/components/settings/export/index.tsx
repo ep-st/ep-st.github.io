@@ -2,7 +2,8 @@ import { Download } from "lucide-react";
 import { useFreelancersCutStore } from "@/features/freelancers-cut/store";
 import { Card, CardContent } from "@/shared/components/ui/card";
 import { ExportActions } from "./actions";
-import { ExportControls } from "./controls";
+import { ExportControls } from "./controls/index";
+
 import { ExportPreview } from "./preview";
 
 export function ExportSettings() {

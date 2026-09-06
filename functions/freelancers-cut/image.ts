@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: it's working so far i'll let it be*/
 import type { PagesFunction } from "@cloudflare/workers-types";
 // @ts-expect-error
 import resvgWasm from "@resvg/resvg-wasm/index_bg.wasm";
