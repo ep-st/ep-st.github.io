@@ -1,176 +1,185 @@
-import { PERK_ENTRIES } from "@/features/freelancers-cut/config/entries";
 import { CONNECTIONS } from "@/features/freelancers-cut/config/connections";
-import { PerkType } from "@/features/freelancers-cut/types";
+import { PERK_ENTRIES } from "@/features/freelancers-cut/config/entries";
 import { getUnlockedMajors } from "@/features/freelancers-cut/core/get-unlocked-majors";
+import { PerkType } from "@/features/freelancers-cut/types";
 
 export async function preloadImages() {
-  const imageCache = new Map<string, HTMLImageElement>();
+	const imageCache = new Map<string, HTMLImageElement>();
 
-  const entries = Object.values(PERK_ENTRIES);
-  const uniqueIcons = Array.from(new Set(entries.map((e) => e.perk.icon)));
+	const entries = Object.values(PERK_ENTRIES);
+	const uniqueIcons = Array.from(new Set(entries.map((e) => e.perk.icon)));
 
-  const promises = uniqueIcons.map(
-    (src) =>
-      new Promise<void>((resolve) => {
-        if (imageCache.has(src)) {
-          resolve();
-          return;
-        }
-        const img = new Image();
-        img.src = src;
-        img.onload = () => {
-          imageCache.set(src, img);
-          resolve();
-        };
-        img.onerror = () => resolve();
-      }),
-  );
+	const promises = uniqueIcons.map(
+		(src) =>
+			new Promise<void>((resolve) => {
+				if (imageCache.has(src)) {
+					resolve();
+					return;
+				}
+				const img = new Image();
+				img.src = src;
+				img.onload = () => {
+					imageCache.set(src, img);
+					resolve();
+				};
+				img.onerror = () => resolve();
+			}),
+	);
 
-  await Promise.all(promises);
-  return imageCache;
+	await Promise.all(promises);
+	return imageCache;
 }
 
+// biome-ignore lint/complexity/noExcessiveCognitiveComplexity: no
+// biome-ignore lint/complexity/useMaxParams: no
+// biome-ignore lint/complexity/noExcessiveLinesPerFunction: no
 export function renderTreeToCanvas(
-  canvas: HTMLCanvasElement,
-  unlockedNodes: Set<string>,
-  withBackground: boolean,
-  withMajorPerks: boolean,
-  imageCache: Map<string, HTMLImageElement>,
+	canvas: HTMLCanvasElement,
+	unlockedNodes: Set<string>,
+	withBackground: boolean,
+	withMajorPerks: boolean,
+	imageCache: Map<string, HTMLImageElement>,
 ) {
-  const scale = 2;
-  const padding = 100;
+	const scale = 2;
+	const padding = 100;
 
-  // Calculate bounds
-  let minX = Infinity;
-  let minY = Infinity;
-  let maxX = -Infinity;
-  let maxY = -Infinity;
+	// Calculate bounds
+	let minX = Number.POSITIVE_INFINITY;
+	let minY = Number.POSITIVE_INFINITY;
+	let maxX = Number.NEGATIVE_INFINITY;
+	let maxY = Number.NEGATIVE_INFINITY;
 
-  Object.values(PERK_ENTRIES).forEach((entry) => {
-    minX = Math.min(minX, entry.position.x);
-    minY = Math.min(minY, entry.position.y);
-    maxX = Math.max(maxX, entry.position.x);
-    maxY = Math.max(maxY, entry.position.y);
-  });
+	for (const entry of Object.values(PERK_ENTRIES)) {
+		minX = Math.min(minX, entry.position.x);
+		minY = Math.min(minY, entry.position.y);
+		maxX = Math.max(maxX, entry.position.x);
+		maxY = Math.max(maxY, entry.position.y);
+	}
 
-  const treeWidth = maxX - minX;
-  const treeHeight = maxY - minY;
+	const treeWidth = maxX - minX;
+	const treeHeight = maxY - minY;
 
-  canvas.width = (treeWidth + padding) * scale;
-  canvas.height = (treeHeight + padding) * scale;
+	canvas.width = (treeWidth + padding) * scale;
+	canvas.height = (treeHeight + padding) * scale;
 
-  const offsetX = padding / 2 - minX;
-  const offsetY = padding / 2 - minY;
+	const offsetX = padding / 2 - minX;
+	const offsetY = padding / 2 - minY;
 
-  const ctx = canvas.getContext("2d");
-  if (!ctx) return;
+	const ctx = canvas.getContext("2d");
+	if (!ctx) {
+		return;
+	}
 
-  ctx.save();
-  ctx.setTransform(1, 0, 0, 1, 0, 0);
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.scale(scale, scale);
+	ctx.save();
+	ctx.setTransform(1, 0, 0, 1, 0, 0);
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.scale(scale, scale);
 
-  if (withBackground) {
-    ctx.fillStyle = "#1a1a1a";
-    ctx.fillRect(0, 0, canvas.width / scale, canvas.height / scale);
-  }
+	if (withBackground) {
+		ctx.fillStyle = "#1a1a1a";
+		ctx.fillRect(0, 0, canvas.width / scale, canvas.height / scale);
+	}
 
-  ctx.save();
-  ctx.translate(offsetX, offsetY);
+	ctx.save();
+	ctx.translate(offsetX, offsetY);
 
-  // Draw connections
-  CONNECTIONS.forEach(([id1, id2]) => {
-    const entry1 = PERK_ENTRIES[id1];
-    const entry2 = PERK_ENTRIES[id2];
-    if (!entry1 || !entry2) return;
+	// Draw connections
+	for (const [id1, id2] of CONNECTIONS) {
+		const entry1 = PERK_ENTRIES[id1];
+		const entry2 = PERK_ENTRIES[id2];
+		if (!(entry1 && entry2)) {
+			return;
+		}
 
-    const isUnlocked = unlockedNodes.has(id1) && unlockedNodes.has(id2);
-    ctx.lineWidth = isUnlocked ? 2 : 0.5;
-    ctx.strokeStyle = isUnlocked ? "white" : "rgba(255, 255, 255, 0.2)";
+		const isUnlocked = unlockedNodes.has(id1) && unlockedNodes.has(id2);
+		ctx.lineWidth = isUnlocked ? 2 : 0.5;
+		ctx.strokeStyle = isUnlocked ? "white" : "rgba(255, 255, 255, 0.2)";
 
-    ctx.beginPath();
-    ctx.moveTo(entry1.position.x, entry1.position.y);
-    ctx.lineTo(entry2.position.x, entry2.position.y);
-    ctx.stroke();
-  });
+		ctx.beginPath();
+		ctx.moveTo(entry1.position.x, entry1.position.y);
+		ctx.lineTo(entry2.position.x, entry2.position.y);
+		ctx.stroke();
+	}
 
-  // Draw perks using cache
-  const entries = Object.entries(PERK_ENTRIES);
-  for (const [id, entry] of entries) {
-    const image = imageCache.get(entry.perk.icon);
-    if (!image) continue;
+	// Draw perks using cache
+	const entries = Object.entries(PERK_ENTRIES);
+	for (const [id, entry] of entries) {
+		const image = imageCache.get(entry.perk.icon);
+		if (!image) {
+			continue;
+		}
 
-    const isUnlocked = unlockedNodes.has(id);
-    ctx.filter = isUnlocked ? "none" : "brightness(30%) saturate(30%)";
+		const isUnlocked = unlockedNodes.has(id);
+		// biome-ignore lint/security/noSecrets: nope
+		ctx.filter = isUnlocked ? "none" : "brightness(30%) saturate(30%)";
 
-    const isMajor = entry.perk.perkType === PerkType.Major;
-    const size = isMajor ? 15 : 9;
-    const x = entry.position.x;
-    const y = entry.position.y;
+		const isMajor = entry.perk.perkType === PerkType.Major;
+		const size = isMajor ? 15 : 9;
+		const x = entry.position.x;
+		const y = entry.position.y;
 
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(x, y, size, 0, Math.PI * 2);
-    ctx.clip();
-    ctx.drawImage(image, x - size, y - size, size * 2, size * 2);
-    ctx.restore();
-  }
-  ctx.restore(); // Restore from translate(offsetX, offsetY)
+		ctx.save();
+		ctx.beginPath();
+		ctx.arc(x, y, size, 0, Math.PI * 2);
+		ctx.clip();
+		ctx.drawImage(image, x - size, y - size, size * 2, size * 2);
+		ctx.restore();
+	}
+	ctx.restore(); // Restore from translate(offsetX, offsetY)
 
-  ctx.filter = "none";
+	ctx.filter = "none";
 
-  // Draw major perks list in the middle
-  if (withMajorPerks) {
-    const unlockedMajors = getUnlockedMajors(unlockedNodes);
+	// Draw major perks list in the middle
+	if (withMajorPerks) {
+		const unlockedMajors = getUnlockedMajors(unlockedNodes);
 
-    const centerX = (treeWidth + padding) / 2;
-    const centerY = (treeHeight + padding) / 2;
+		const centerX = (treeWidth + padding) / 2;
+		const centerY = (treeHeight + padding) / 2;
 
-    ctx.save();
-    ctx.translate(centerX, centerY + 10);
+		ctx.save();
+		ctx.translate(centerX, centerY + 10);
 
-    const sortedMajors = Array.from(unlockedMajors.entries()).sort(
-      (a, b) => b[1] - a[1] || a[0].name.localeCompare(b[0].name),
-    );
+		const sortedMajors = Array.from(unlockedMajors.entries()).sort(
+			(a, b) => b[1] - a[1] || a[0].name.localeCompare(b[0].name),
+		);
 
-    const lineHeight = 9;
-    const totalHeight = sortedMajors.length * lineHeight;
-    let currentY = -totalHeight / 2;
+		const lineHeight = 9;
+		const totalHeight = sortedMajors.length * lineHeight;
+		let currentY = -totalHeight / 2;
 
-    sortedMajors.forEach(([perk, count]) => {
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
+		for (const [perk, count] of sortedMajors) {
+			ctx.textAlign = "center";
+			ctx.textBaseline = "middle";
 
-      const text = `${perk.name} ${count}`;
+			const text = `${perk.name} ${count}`;
 
-      ctx.font = "600 8px 'Inter', system-ui, sans-serif";
-      ctx.fillStyle = "#FFFFFF";
-      ctx.fillText(text, 0, currentY);
+			ctx.font = "600 8px 'Inter', system-ui, sans-serif";
+			ctx.fillStyle = "#FFFFFF";
+			ctx.fillText(text, 0, currentY);
 
-      currentY += lineHeight;
-    });
+			currentY += lineHeight;
+		}
 
-    ctx.restore();
-  }
+		ctx.restore();
+	}
 
-  ctx.restore(); // Restore from scale/setTransform
+	ctx.restore(); // Restore from scale/setTransform
 }
 
 export function downloadImage(dataUrl: string, unlockedCount: number) {
-  const fileName = `freelancer-tree-${unlockedCount}.png`;
-  const link = document.createElement("a");
-  link.download = fileName;
-  link.href = dataUrl;
-  link.click();
+	const fileName = `freelancer-tree-${unlockedCount}.png`;
+	const link = document.createElement("a");
+	link.download = fileName;
+	link.href = dataUrl;
+	link.click();
 }
 
 export async function copyImageToClipboard(dataUrl: string) {
-  try {
-    const blob = await fetch(dataUrl).then((r) => r.blob());
-    await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
-    return true;
-  } catch (err) {
-    console.error("Clipboard fail:", err);
-    return false;
-  }
+	try {
+		const blob = await fetch(dataUrl).then((r) => r.blob());
+		await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
+		return true;
+	} catch {
+		return false;
+	}
 }

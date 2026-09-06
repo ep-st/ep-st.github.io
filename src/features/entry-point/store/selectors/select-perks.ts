@@ -1,90 +1,90 @@
-import { PERK_ENTRIES } from "@/features/entry-point/config/entries";
-import { PerkType, type Perk } from "@/features/entry-point/types";
-import { areSetsEqual } from "@/shared/utils/are-sets-equal";
 import { createSelector } from "reselect";
-import type { StoreState } from "..";
+import { PERK_ENTRIES } from "@/features/entry-point/config/entries";
+import { type Perk, PerkType } from "@/features/entry-point/types";
+import { areSetsEqual } from "@/shared/utils/are-sets-equal";
+import type { StoreState } from "../index";
 
 const getUnlockedNodes = (state: StoreState) => state.unlockedNodes;
 
 export const selectUnlockedMinorPerks = createSelector(
-  [getUnlockedNodes],
-  (unlockedNodes) => {
-    const result = new Set<string>();
+	[getUnlockedNodes],
+	(unlockedNodes) => {
+		const result = new Set<string>();
 
-    for (const node of unlockedNodes) {
-      const perk = PERK_ENTRIES[node];
+		for (const node of unlockedNodes) {
+			const perk = PERK_ENTRIES[node];
 
-      if (perk.perk.perkType === PerkType.Minor) {
-        result.add(node);
-      }
-    }
+			if (perk.perk.perkType === PerkType.Minor) {
+				result.add(node);
+			}
+		}
 
-    return result;
-  },
-  {
-    memoizeOptions: {
-      resultEqualityCheck: areSetsEqual,
-    },
-  },
+		return result;
+	},
+	{
+		memoizeOptions: {
+			resultEqualityCheck: areSetsEqual,
+		},
+	},
 );
 
 export const selectUnlockedMinorPerksMap = createSelector(
-  [selectUnlockedMinorPerks],
-  (unlockedMinorPerks) => {
-    const map = new Map<Perk, number>();
-    for (const minorPerk of unlockedMinorPerks) {
-      const perkEntry = PERK_ENTRIES[minorPerk];
-      map.set(perkEntry.perk, (map.get(perkEntry.perk) ?? 0) + 1);
-    }
+	[selectUnlockedMinorPerks],
+	(unlockedMinorPerks) => {
+		const map = new Map<Perk, number>();
+		for (const minorPerk of unlockedMinorPerks) {
+			const perkEntry = PERK_ENTRIES[minorPerk];
+			map.set(perkEntry.perk, (map.get(perkEntry.perk) ?? 0) + 1);
+		}
 
-    return map;
-  },
+		return map;
+	},
 );
 
 export const selectUnlockedUniquePerks = createSelector(
-  [getUnlockedNodes],
-  (unlockedNodes) => {
-    const result = new Set<Perk>();
+	[getUnlockedNodes],
+	(unlockedNodes) => {
+		const result = new Set<Perk>();
 
-    for (const node of unlockedNodes) {
-      const entry = PERK_ENTRIES[node];
-      if (entry?.perk.perkType === PerkType.Unique) {
-        result.add(entry.perk);
-      }
-    }
+		for (const node of unlockedNodes) {
+			const entry = PERK_ENTRIES[node];
+			if (entry?.perk.perkType === PerkType.Unique) {
+				result.add(entry.perk);
+			}
+		}
 
-    return result;
-  },
+		return result;
+	},
 );
 
 export const selectUnlockedClassPerks = createSelector(
-  [getUnlockedNodes],
-  (unlockedNodes) => {
-    const result = new Set<Perk>();
+	[getUnlockedNodes],
+	(unlockedNodes) => {
+		const result = new Set<Perk>();
 
-    for (const node of unlockedNodes) {
-      const entry = PERK_ENTRIES[node];
-      if (entry?.perk.perkType === PerkType.Class) {
-        result.add(entry.perk);
-      }
-    }
+		for (const node of unlockedNodes) {
+			const entry = PERK_ENTRIES[node];
+			if (entry?.perk.perkType === PerkType.Class) {
+				result.add(entry.perk);
+			}
+		}
 
-    return result;
-  },
+		return result;
+	},
 );
 
 export const selectUnlockedWeaponMasteries = createSelector(
-  [getUnlockedNodes],
-  (unlockedNodes) => {
-    const result = new Set<Perk>();
+	[getUnlockedNodes],
+	(unlockedNodes) => {
+		const result = new Set<Perk>();
 
-    for (const node of unlockedNodes) {
-      const entry = PERK_ENTRIES[node];
-      if (entry?.perk.perkType === PerkType.WeaponMastery) {
-        result.add(entry.perk);
-      }
-    }
+		for (const node of unlockedNodes) {
+			const entry = PERK_ENTRIES[node];
+			if (entry?.perk.perkType === PerkType.WeaponMastery) {
+				result.add(entry.perk);
+			}
+		}
 
-    return result;
-  },
+		return result;
+	},
 );

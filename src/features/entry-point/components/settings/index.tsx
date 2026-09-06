@@ -1,14 +1,15 @@
-import ExportSettings from "./export";
-import PerkLimit from "./perk-limit";
-import StarterClassSettings from "./starter-class";
+import { DebugSettings } from "./debug-settings";
+import { ExportSettings } from "./export";
+import { PerkLimit } from "./perk-limit";
+import { StarterClassSettings } from "./starter-class";
 
-export default function Settings() {
-  return (
-    <div className="flex flex-col gap-1.5 animate-in fade-in slide-in-from-bottom-2 duration-500">
-      <StarterClassSettings />
-      <PerkLimit />
-      <ExportSettings />
-    </div>
-  );
+export function Settings() {
+	return (
+		<div className="fade-in slide-in-from-bottom-2 flex animate-in flex-col gap-1.5 duration-500">
+			<StarterClassSettings />
+			<PerkLimit />
+			<ExportSettings />
+			<DebugSettings />
+		</div>
+	);
 }
-

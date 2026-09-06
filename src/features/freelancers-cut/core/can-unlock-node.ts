@@ -19,33 +19,33 @@
 //   return invalidNodes;
 // }
 
-export default function canUnlockNode(
-  unlockedNodes: Set<string>,
-  perkLimit: number,
-  id: string,
+export function canUnlockNode(
+	unlockedNodes: Set<string>,
+	perkLimit: number,
+	_id: string,
 ): boolean {
-  if (unlockedNodes.size >= perkLimit) {
-    return false;
-  }
+	if (unlockedNodes.size >= perkLimit) {
+		return false;
+	}
 
-  return true;
+	return true;
 }
 
 export function getUnlockableNodes(
-  unlockedNodes: Set<string>,
-  perkLimit: number,
-  nodesToUnlock: Array<string>,
-): Array<string> {
-  const currentUnlockedNodes = new Set([...unlockedNodes]);
-  const result: Array<string> = [];
+	unlockedNodes: Set<string>,
+	perkLimit: number,
+	nodesToUnlock: string[],
+): string[] {
+	const currentUnlockedNodes = new Set([...unlockedNodes]);
+	const result: string[] = [];
 
-  for (const node of nodesToUnlock) {
-    if (!canUnlockNode(currentUnlockedNodes, perkLimit, node)) {
-      return result;
-    }
-    result.push(node);
-    currentUnlockedNodes.add(node);
-  }
+	for (const node of nodesToUnlock) {
+		if (!canUnlockNode(currentUnlockedNodes, perkLimit, node)) {
+			return result;
+		}
+		result.push(node);
+		currentUnlockedNodes.add(node);
+	}
 
-  return result;
+	return result;
 }

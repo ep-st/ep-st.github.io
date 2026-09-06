@@ -1,29 +1,26 @@
 import type { Description } from "@/features/freelancers-cut/types";
 
-export function description(data: string): Description {
-  return (_) => data;
-}
-
 function replace(pattern: string, multipliers: number[], value: number) {
-  let result = pattern;
+	let result = pattern;
 
-  for (let i = 0; i < multipliers.length; i++) {
-    result = result.replace("{}", `${multipliers[i] * value}`);
-  }
+	for (const multiplier of multipliers) {
+		result = result.replace("{}", `${multiplier * value}`);
+	}
 
-  return result;
+	return result;
 }
 
 export function multiplicativeAbility(
-  pattern: string,
-  ...multipliers: number[]
+	pattern: string,
+	...multipliers: number[]
 ): Description {
-  return (level) => replace(pattern, multipliers, level);
+	return (level) => replace(pattern, multipliers, level);
 }
 
 export function setAbility(array: string[]): Description {
-  return (level) => {
-    return array[Math.min(level, array.length - 1)];
-  };
+	return (level) => array[Math.min(level, array.length - 1)];
 }
 
+export function description(data: string): Description {
+	return (_) => data;
+}
