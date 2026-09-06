@@ -45,22 +45,25 @@ export function renderTreeToSvg(
     return `<line x1="${entry1.position.x}" y1="${entry1.position.y}" x2="${entry2.position.x}" y2="${entry2.position.y}" stroke="${stroke}" stroke-width="${strokeWidth}" />`;
   }).join("\n");
 
-  const nodes = Object.entries(PERK_ENTRIES).map(([id, entry]) => {
-    const isUnlocked = unlockedNodes.has(id);
-    const isMajor = entry.perk.perkType === PerkType.Major;
-    const size = isMajor ? 15 : 9;
-    const x = entry.position.x;
-    const y = entry.position.y;
-    
-    const filter = isUnlocked ? 'filter="url(#unlocked)"' : 'filter="brightness(0.3) saturate(0.3)"';
-    const iconBase64 = imageCache.get(entry.perk.icon);
-    
-    // Fallback if image not in cache
-    const imageElement = iconBase64 
-      ? `<image href="${iconBase64}" x="${x - size}" y="${y - size}" width="${size * 2}" height="${size * 2}" clip-path="url(#clip-${id})" />`
-      : `<circle cx="${x}" cy="${y}" r="${size}" fill="${isUnlocked ? "white" : "#444"}" />`;
+  const nodes = Object.entries(PERK_ENTRIES)
+    .map(([id, entry]) => {
+      const isUnlocked = unlockedNodes.has(id);
+      const isMajor = entry.perk.perkType === PerkType.Major;
+      const size = isMajor ? 15 : 9;
+      const x = entry.position.x;
+      const y = entry.position.y;
 
-    return `
+      const filter = isUnlocked
+        ? 'filter="url(#unlocked)"'
+        : 'filter="brightness(0.3) saturate(0.3)"';
+      const iconBase64 = imageCache.get(entry.perk.icon);
+
+      // Fallback if image not in cache
+      const imageElement = iconBase64
+        ? `<image href="${iconBase64}" x="${x - size}" y="${y - size}" width="${size * 2}" height="${size * 2}" clip-path="url(#clip-${id})" />`
+        : `<circle cx="${x}" cy="${y}" r="${size}" fill="${isUnlocked ? "white" : "#444"}" />`;
+
+      return `
       <g ${filter}>
         <defs>
           <clipPath id="clip-${id}">
@@ -71,7 +74,8 @@ export function renderTreeToSvg(
         <circle cx="${x}" cy="${y}" r="${size}" fill="none" stroke="${isUnlocked ? "white" : "rgba(255, 255, 255, 0.2)"}" stroke-width="0.5" clip-path="url(#clip-${id})" />
       </g>
     `;
-  }).join("\n");
+    })
+    .join("\n");
 
   return `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}" width="${width}" height="${height}" style="background: #1a1a1a;">

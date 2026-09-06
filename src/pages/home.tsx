@@ -11,10 +11,10 @@ import { Link } from "react-router";
 
 export default function Home() {
   return (
-    <div className="min-h-screen w-full flex flex-col bg-background text-foreground">
-      <header className="h-16 w-full border-b border-border/40 flex items-center px-6 sm:px-12 shrink-0 bg-background/50 backdrop-blur-md sticky top-0 z-50">
-        <div className="flex justify-between w-full items-center max-w-6xl mx-auto">
-          <div className="flex items-center gap-2.5 text-[10px] font-bold tracking-[0.25em] text-muted-foreground/50 truncate">
+    <div className="bg-background text-foreground flex min-h-screen w-full flex-col">
+      <header className="border-border/40 bg-background/50 sticky top-0 z-50 flex h-16 w-full shrink-0 items-center border-b px-6 backdrop-blur-md sm:px-12">
+        <div className="mx-auto flex w-full max-w-6xl items-center justify-between">
+          <div className="text-muted-foreground/50 flex items-center gap-2.5 truncate text-[10px] font-bold tracking-[0.25em]">
             <span className="hidden sm:inline">Skill Tree Editors for</span>
             <span className="text-foreground/70">Entry Point</span>
             <span className="text-primary/30 font-normal">&</span>
@@ -27,9 +27,9 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="flex-1 flex flex-col items-center justify-center p-6 sm:p-12 mx-auto w-full max-w-5xl">
+      <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center p-6 sm:p-12">
         <div className="w-full space-y-16 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12">
             <ModeCard
               title="Entry Point"
               to="/entry-point"
@@ -46,8 +46,8 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className="h-16 border-t border-border/40 px-6 sm:px-12 bg-background/50 items-center flex shrink-0">
-        <div className="max-w-5xl mx-auto flex justify-center items-center text-[10px] font-bold text-muted-foreground/30 tracking-widest text-center">
+      <footer className="border-border/40 bg-background/50 flex h-16 shrink-0 items-center border-t px-6 sm:px-12">
+        <div className="text-muted-foreground/30 mx-auto flex max-w-5xl items-center justify-center text-center text-[10px] font-bold tracking-widest">
           This project is unofficial and has no association with Cishshato.
         </div>
       </footer>
@@ -68,20 +68,20 @@ export function ModeCard({
 }) {
   return (
     <Card
-      className={`relative overflow-hidden group bg-card/40 border-border/40 hover:border-primary/50 transition-all duration-300 min-h-[300px] md:min-h-[600px] flex flex-col ${!isReady ? "opacity-60 grayscale-[0.8]" : ""}`}
+      className={`group bg-card/40 border-border/40 hover:border-primary/50 relative flex min-h-[300px] flex-col overflow-hidden transition-all duration-300 md:min-h-[600px] ${!isReady ? "opacity-60 grayscale-[0.8]" : ""}`}
     >
       <img
         src={bgImage}
         alt={title}
         className={cn(
-          "absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-1000",
+          "absolute inset-0 z-0 h-full w-full object-cover transition-transform duration-1000",
           isReady ? "group-hover:scale-110" : "",
         )}
       />
-      <div className="absolute inset-0 z-1 bg-black/60 group-hover:bg-black/40 transition-colors duration-500" />
+      <div className="absolute inset-0 z-1 bg-black/60 transition-colors duration-500 group-hover:bg-black/40" />
 
-      <div className="relative z-10 flex flex-col flex-1">
-        <CardHeader className="p-12 pb-8 text-center flex-1 flex flex-col justify-center">
+      <div className="relative z-10 flex flex-1 flex-col">
+        <CardHeader className="flex flex-1 flex-col justify-center p-12 pb-8 text-center">
           <CardTitle
             className={cn(
               "text-4xl font-bold tracking-tight",
@@ -96,13 +96,13 @@ export function ModeCard({
             <Button
               asChild
               size="lg"
-              className="w-full font-bold shadow-lg shadow-primary/20 h-16 text-xl"
+              className="shadow-primary/20 h-16 w-full text-xl font-bold shadow-lg"
             >
               <Link to={to}>Open Editor</Link>
             </Button>
           ) : (
             <>
-              <div className="w-full font-bold h-16 text-xl flex items-center justify-center border-2 border-dashed border-border/40 text-muted-foreground rounded-md">
+              <div className="border-border/40 text-muted-foreground flex h-16 w-full items-center justify-center rounded-md border-2 border-dashed text-xl font-bold">
                 Coming Soon
               </div>
             </>

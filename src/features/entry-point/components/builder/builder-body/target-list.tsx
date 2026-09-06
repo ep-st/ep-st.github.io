@@ -48,12 +48,12 @@ export function TargetList() {
 
   if (totalTargets === 0) {
     return (
-      <div className="flex flex-col items-center justify-center h-full text-center p-4 text-muted-foreground select-none">
-        <Zap className="size-8 text-muted-foreground/20 mb-2" />
-        <span className="text-[13px] font-semibold text-foreground/60">
+      <div className="text-muted-foreground flex h-full flex-col items-center justify-center p-4 text-center select-none">
+        <Zap className="text-muted-foreground/20 mb-2 size-8" />
+        <span className="text-foreground/60 text-[13px] font-semibold">
           No targets added yet
         </span>
-        <span className="text-[11px] mt-0.5 text-muted-foreground/70 max-w-50">
+        <span className="text-muted-foreground/70 mt-0.5 max-w-50 text-[11px]">
           Use search above to pick perks for the optimal path.
         </span>
       </div>
@@ -64,12 +64,12 @@ export function TargetList() {
     <div className="flex flex-col gap-1.5">
       {grouped.map(({ type, label, items }) => (
         <Collapsible key={type} defaultOpen>
-          <CollapsibleTrigger className="group flex items-center gap-2 w-full px-1 py-1.5 text-left cursor-pointer select-none">
-            <ChevronDown className="size-3.5 text-muted-foreground/50 transition-transform duration-200 group-data-[state=closed]:-rotate-90" />
-            <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider">
+          <CollapsibleTrigger className="group flex w-full cursor-pointer items-center gap-2 px-1 py-1.5 text-left select-none">
+            <ChevronDown className="text-muted-foreground/50 size-3.5 transition-transform duration-200 group-data-[state=closed]:-rotate-90" />
+            <span className="text-muted-foreground text-[11px] font-bold tracking-wider uppercase">
               {label}
             </span>
-            <span className="ml-auto text-[10px] font-bold text-muted-foreground/60 bg-muted/40 px-1.5 py-0.5 rounded-md tabular-nums">
+            <span className="text-muted-foreground/60 bg-muted/40 ml-auto rounded-md px-1.5 py-0.5 text-[10px] font-bold tabular-nums">
               {items.length}
             </span>
           </CollapsibleTrigger>

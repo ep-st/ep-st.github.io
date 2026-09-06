@@ -205,4 +205,3 @@ export const minors = {
   HeavyWeaponsTraining: HeavyWeaponsTraining,
   SniperTraining: SniperTraining,
 } as const;
-

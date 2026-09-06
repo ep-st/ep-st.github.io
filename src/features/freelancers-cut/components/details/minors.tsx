@@ -10,10 +10,10 @@ export default function MinorPerksDetails() {
   const perks = Object.values(minors);
 
   return (
-    <Card className="w-full flex flex-col gap-3 p-4 transition-all duration-300 bg-card/60 md:backdrop-blur-md border-border/50 ring-1 ring-secondary/5 hover:ring-secondary/10 rounded-2xl h-fit shrink-0 shadow-lg">
+    <Card className="bg-card/60 border-border/50 ring-secondary/5 hover:ring-secondary/10 flex h-fit w-full shrink-0 flex-col gap-3 rounded-2xl p-4 shadow-lg ring-1 transition-all duration-300 md:backdrop-blur-md">
       <CardHeader className="flex flex-row items-center gap-3 px-1 py-0 select-none">
-        <div className="h-6 w-1 rounded-full bg-secondary shadow-[0_0_8px_rgba(var(--secondary-rgb),0.3)]" />
-        <span className="font-bold text-lg tracking-tight text-foreground/90">
+        <div className="bg-secondary h-6 w-1 rounded-full shadow-[0_0_8px_rgba(var(--secondary-rgb),0.3)]" />
+        <span className="text-foreground/90 text-lg font-bold tracking-tight">
           Minor Perks
         </span>
       </CardHeader>
@@ -42,7 +42,7 @@ function MinorPerkItem({ perk }: Props) {
     <Item
       variant="outline"
       className={cn(
-        "group relative overflow-hidden transition-all duration-300 w-full cursor-default rounded-xl py-2 px-3 border-transparent",
+        "group relative w-full cursor-default overflow-hidden rounded-xl border-transparent px-3 py-2 transition-all duration-300",
         "bg-muted/20 hover:bg-muted/30",
         isUnlocked && [
           "bg-secondary/5 border-secondary/10 shadow-sm",
@@ -50,13 +50,13 @@ function MinorPerkItem({ perk }: Props) {
         ],
       )}
     >
-      <ItemContent className="flex flex-row items-center gap-3 w-full">
+      <ItemContent className="flex w-full flex-row items-center gap-3">
         <div
           className={cn(
             "relative flex size-8 shrink-0 items-center justify-center rounded-full transition-all duration-500",
             isUnlocked
               ? "bg-secondary/20 shadow-[0_0_10px_rgba(var(--secondary-rgb),0.2)]"
-              : "bg-muted/50 grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100",
+              : "bg-muted/50 opacity-40 grayscale group-hover:opacity-100 group-hover:grayscale-0",
           )}
         >
           <img
@@ -71,7 +71,7 @@ function MinorPerkItem({ perk }: Props) {
 
         <ItemTitle
           className={cn(
-            "flex-1 font-bold text-[11px] leading-tight tracking-tight truncate",
+            "flex-1 truncate text-[11px] leading-tight font-bold tracking-tight",
             isUnlocked ? "text-foreground" : "text-muted-foreground/60",
           )}
           title={perk.name}
@@ -79,9 +79,9 @@ function MinorPerkItem({ perk }: Props) {
           {perk.name}
         </ItemTitle>
 
-        <div className="w-5 flex justify-end shrink-0">
+        <div className="flex w-5 shrink-0 justify-end">
           {count > 0 && (
-            <span className="flex items-center justify-center min-w-5 h-5 px-1.5 rounded-lg text-[10px] font-black tabular-nums bg-secondary text-secondary-foreground shadow-sm">
+            <span className="bg-secondary text-secondary-foreground flex h-5 min-w-5 items-center justify-center rounded-lg px-1.5 text-[10px] font-black tabular-nums shadow-sm">
               {count}
             </span>
           )}

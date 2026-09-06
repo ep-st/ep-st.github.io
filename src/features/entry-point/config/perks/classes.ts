@@ -43,4 +43,3 @@ export const classes = {
   CombatMastery: CombatMastery,
   DemolitionsExpert: DemolitionsExpert,
 } satisfies Record<string, Perk>;
-

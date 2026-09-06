@@ -19,15 +19,15 @@ export default function MajorPerksDetails() {
   if (perks.length === 0) return null;
 
   return (
-    <Card className="w-full flex flex-col gap-3 p-4 transition-all duration-300 bg-card/60 md:backdrop-blur-md border-border/50 ring-1 ring-primary/5 hover:ring-primary/10 rounded-2xl h-fit shrink-0 shadow-lg">
+    <Card className="bg-card/60 border-border/50 ring-primary/5 hover:ring-primary/10 flex h-fit w-full shrink-0 flex-col gap-3 rounded-2xl p-4 shadow-lg ring-1 transition-all duration-300 md:backdrop-blur-md">
       <CardHeader className="flex flex-row items-center gap-3 px-1 py-0 select-none">
-        <div className="h-6 w-1 rounded-full bg-primary shadow-[0_0_8px_rgba(var(--primary-rgb),0.4)]" />
-        <span className="font-bold text-lg tracking-tight text-foreground/90">
+        <div className="bg-primary h-6 w-1 rounded-full shadow-[0_0_8px_rgba(var(--primary-rgb),0.4)]" />
+        <span className="text-foreground/90 text-lg font-bold tracking-tight">
           Major Perks
         </span>
       </CardHeader>
       <CardContent className="px-0 pb-0">
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 gap-2 xl:grid-cols-2">
           {perks.map((perk) => (
             <MajorPerkItem key={perk.name} perk={perk} />
           ))}
@@ -51,7 +51,7 @@ function MajorPerkItem({ perk }: Props) {
     <Item
       variant="outline"
       className={cn(
-        "group relative overflow-hidden transition-all duration-300 w-full cursor-default rounded-xl py-3 px-4 border-transparent",
+        "group relative w-full cursor-default overflow-hidden rounded-xl border-transparent px-4 py-3 transition-all duration-300",
         "bg-muted/20 hover:bg-muted/30",
         isUnlocked && [
           "bg-primary/5 border-primary/10 shadow-sm",
@@ -59,13 +59,13 @@ function MajorPerkItem({ perk }: Props) {
         ],
       )}
     >
-      <ItemContent className="flex flex-row items-center gap-3 w-full">
+      <ItemContent className="flex w-full flex-row items-center gap-3">
         <div
           className={cn(
             "relative flex size-9 shrink-0 items-center justify-center rounded-full transition-all duration-500",
             isUnlocked
               ? "bg-primary/20 shadow-[0_0_10px_rgba(var(--primary-rgb),0.2)]"
-              : "bg-muted/50 grayscale opacity-40",
+              : "bg-muted/50 opacity-40 grayscale",
           )}
         >
           <img
@@ -78,17 +78,17 @@ function MajorPerkItem({ perk }: Props) {
           />
         </div>
 
-        <div className="flex flex-col flex-1 min-w-0">
+        <div className="flex min-w-0 flex-1 flex-col">
           <ItemTitle
             className={cn(
-              "font-bold text-[12px] leading-tight tracking-tight truncate",
+              "truncate text-[12px] leading-tight font-bold tracking-tight",
               isUnlocked ? "text-foreground" : "text-muted-foreground/60",
             )}
             title={perk.name}
           >
             {perk.name} {count}
           </ItemTitle>
-          <div className="flex gap-0.5 mt-1">
+          <div className="mt-1 flex gap-0.5">
             {[1, 2, 3].map((level) => (
               <div
                 key={level}

@@ -31,7 +31,7 @@ export default function Editor() {
       >
         <svg
           viewBox="0 -20 640 690"
-          className="w-full h-full select-none"
+          className="h-full w-full select-none"
           preserveAspectRatio="xMidYMid meet"
           width="100%"
           height="100%"
@@ -49,4 +49,3 @@ export default function Editor() {
     </TransformWrapper>
   );
 }
-

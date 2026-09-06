@@ -17,13 +17,13 @@ export default function StarterClassSettings() {
   const changeStarterClass = useEntryPointStore((s) => s.changeStarterClass);
 
   return (
-    <Card className="bg-card/60 md:backdrop-blur-md border-border/50 ring-1 ring-primary/5 hover:ring-primary/10 transition-all rounded-xl shadow-lg overflow-hidden">
+    <Card className="bg-card/60 border-border/50 ring-primary/5 hover:ring-primary/10 overflow-hidden rounded-xl shadow-lg ring-1 transition-all md:backdrop-blur-md">
       <CardHeader className="px-4 py-0 pb-0">
         <div className="flex items-center gap-2">
-          <div className="p-1 rounded bg-secondary/10">
-            <User className="size-4 text-primary" />
+          <div className="bg-secondary/10 rounded p-1">
+            <User className="text-primary size-4" />
           </div>
-          <span className="font-bold text-[14px] tracking-tight text-foreground">
+          <span className="text-foreground text-[14px] font-bold tracking-tight">
             Starter Class
           </span>
         </div>
@@ -39,24 +39,24 @@ export default function StarterClassSettings() {
                 key={cls.name}
                 onClick={() => changeStarterClass(enumValue)}
                 className={cn(
-                  "group relative flex flex-col items-center gap-1.5 py-2 px-2 rounded-lg transition-all duration-500 border-2",
+                  "group relative flex flex-col items-center gap-1.5 rounded-lg border-2 px-2 py-2 transition-all duration-500",
                   isActive
-                    ? "bg-secondary/80 border-secondary shadow-lg shadow-secondary/20 z-10 scale-[1.02]"
-                    : "bg-transparent border-transparent opacity-40 hover:opacity-60 grayscale",
+                    ? "bg-secondary/80 border-secondary shadow-secondary/20 z-10 scale-[1.02] shadow-lg"
+                    : "border-transparent bg-transparent opacity-40 grayscale hover:opacity-60",
                 )}
               >
                 <div
                   className={cn(
-                    "relative size-9 rounded-full overflow-hidden transition-all duration-500 shadow-sm",
+                    "relative size-9 overflow-hidden rounded-full shadow-sm transition-all duration-500",
                     isActive
-                      ? "ring-2 ring-white/40 ring-offset-1 ring-offset-secondary/80 scale-105"
+                      ? "ring-offset-secondary/80 scale-105 ring-2 ring-white/40 ring-offset-1"
                       : "opacity-80",
                   )}
                 >
                   <img
                     src={cls.icon}
                     alt={cls.name}
-                    className="object-cover size-full"
+                    className="size-full object-cover"
                   />
                 </div>
                 <span

@@ -3,4 +3,3 @@ export function areSetsEqual<T>(a: Set<T>, b: Set<T>): boolean {
   for (const v of a) if (!b.has(v)) return false;
   return true;
 }
-

@@ -25,8 +25,8 @@ function DebugToggle({ option }: { option: DebugOption }) {
   const setChecked = useEntryPointStore(option.selectSetter);
 
   return (
-    <div className="flex items-center justify-between h-10">
-      <span className="text-[13px] font-bold text-foreground/90">
+    <div className="flex h-10 items-center justify-between">
+      <span className="text-foreground/90 text-[13px] font-bold">
         {option.label}
       </span>
       <button
@@ -40,7 +40,7 @@ function DebugToggle({ option }: { option: DebugOption }) {
       >
         <span
           className={cn(
-            "pointer-events-none inline-block size-4 rounded-full bg-background shadow-sm ring-0 transition-transform duration-200",
+            "bg-background pointer-events-none inline-block size-4 rounded-full shadow-sm ring-0 transition-transform duration-200",
             checked ? "translate-x-4" : "translate-x-0",
           )}
         />
@@ -51,13 +51,13 @@ function DebugToggle({ option }: { option: DebugOption }) {
 
 export default function DebugSettings() {
   return (
-    <Card className="bg-card/60 md:backdrop-blur-md border-border/50 ring-1 ring-primary/5 hover:ring-primary/10 transition-all rounded-xl shadow-md overflow-hidden gap-0 py-3">
-      <CardContent className="px-4 py-0 flex flex-col">
-        <div className="flex items-center gap-2 h-8">
-          <div className="p-1 rounded bg-secondary/10">
-            <Bug className="size-4 text-primary" />
+    <Card className="bg-card/60 border-border/50 ring-primary/5 hover:ring-primary/10 gap-0 overflow-hidden rounded-xl py-3 shadow-md ring-1 transition-all md:backdrop-blur-md">
+      <CardContent className="flex flex-col px-4 py-0">
+        <div className="flex h-8 items-center gap-2">
+          <div className="bg-secondary/10 rounded p-1">
+            <Bug className="text-primary size-4" />
           </div>
-          <span className="text-[13px] font-bold text-foreground/90">
+          <span className="text-foreground/90 text-[13px] font-bold">
             Debug
           </span>
         </div>

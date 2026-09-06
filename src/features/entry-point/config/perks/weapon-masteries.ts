@@ -63,4 +63,3 @@ export const weaponMasteries = {
   HeavyWeaponsMastery: HeavyWeaponsMastery,
   SniperMastery: SniperMastery,
 } as const;
-

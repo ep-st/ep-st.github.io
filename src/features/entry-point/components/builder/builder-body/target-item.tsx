@@ -34,22 +34,22 @@ export function TargetItem({ target }: TargetItemProps) {
   };
 
   return (
-    <div className="group flex items-center justify-between p-2.5 rounded-xl bg-background/50 border border-border/40 hover:border-primary/30 hover:bg-background/80 hover:shadow-sm transition-all duration-300 gap-2">
+    <div className="group bg-background/50 border-border/40 hover:border-primary/30 hover:bg-background/80 flex items-center justify-between gap-2 rounded-xl border p-2.5 transition-all duration-300 hover:shadow-sm">
       {/* Icon and Name */}
-      <div className="flex items-center gap-2.5 min-w-0">
-        <div className="relative size-8 rounded-lg bg-muted flex items-center justify-center p-1 border border-border/40 group-hover:border-primary/20 shrink-0 transition-colors shadow-sm">
+      <div className="flex min-w-0 items-center gap-2.5">
+        <div className="bg-muted border-border/40 group-hover:border-primary/20 relative flex size-8 shrink-0 items-center justify-center rounded-lg border p-1 shadow-sm transition-colors">
           <img
             src={target.perk.icon}
             alt={target.perk.name}
-            className="size-full object-contain filter group-hover:brightness-110 transition-all duration-300"
+            className="size-full object-contain filter transition-all duration-300 group-hover:brightness-110"
           />
         </div>
-        <div className="flex flex-col min-w-0">
-          <span className="text-[13px] font-bold text-foreground/90 group-hover:text-foreground truncate leading-snug">
+        <div className="flex min-w-0 flex-col">
+          <span className="text-foreground/90 group-hover:text-foreground truncate text-[13px] leading-snug font-bold">
             {target.perk.name}
           </span>
           {maxAmount > 1 && (
-            <span className="text-[10px] text-muted-foreground font-medium select-none">
+            <span className="text-muted-foreground text-[10px] font-medium select-none">
               Goal: {target.amount} / {maxAmount}
             </span>
           )}
@@ -57,10 +57,10 @@ export function TargetItem({ target }: TargetItemProps) {
       </div>
 
       {/* Actions (Count and Delete) */}
-      <div className="flex items-center gap-2 shrink-0">
+      <div className="flex shrink-0 items-center gap-2">
         {/* Quantity Controls (Only show if maxAmount > 1) */}
         {maxAmount > 1 && (
-          <div className="flex items-center bg-muted/40 border border-border/50 rounded-lg p-0.5 shadow-inner">
+          <div className="bg-muted/40 border-border/50 flex items-center rounded-lg border p-0.5 shadow-inner">
             <button
               onClick={() => handleDecrease(1)}
               onContextMenu={(e) => {
@@ -68,12 +68,12 @@ export function TargetItem({ target }: TargetItemProps) {
                 handleDecrease(3);
               }}
               disabled={target.amount <= 1}
-              className="size-6 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-background disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-muted-foreground transition-all cursor-pointer disabled:cursor-not-allowed"
+              className="text-muted-foreground hover:text-foreground hover:bg-background disabled:hover:text-muted-foreground flex size-6 cursor-pointer items-center justify-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent"
               title="Decrease quantity"
             >
               <Minus className="size-3" />
             </button>
-            <span className="w-6 text-center text-[12px] font-bold text-foreground tabular-nums select-none">
+            <span className="text-foreground w-6 text-center text-[12px] font-bold tabular-nums select-none">
               {target.amount}
             </span>
             <button
@@ -83,7 +83,7 @@ export function TargetItem({ target }: TargetItemProps) {
                 handleIncrease(3);
               }}
               disabled={target.amount >= maxAmount}
-              className="size-6 rounded-md flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-background disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-muted-foreground transition-all cursor-pointer disabled:cursor-not-allowed"
+              className="text-muted-foreground hover:text-foreground hover:bg-background disabled:hover:text-muted-foreground flex size-6 cursor-pointer items-center justify-center rounded-md transition-all disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent"
               title="Increase quantity"
             >
               <Plus className="size-3" />
@@ -96,7 +96,7 @@ export function TargetItem({ target }: TargetItemProps) {
           variant="destructive"
           size="icon-xs"
           onClick={() => removeBuilderTarget(target.perk)}
-          className="rounded-lg h-7 w-7 opacity-75 group-hover:opacity-100 transition-opacity duration-300 font-bold"
+          className="h-7 w-7 rounded-lg font-bold opacity-75 transition-opacity duration-300 group-hover:opacity-100"
           title="Remove target"
         >
           <Trash2 className="size-3.5" />

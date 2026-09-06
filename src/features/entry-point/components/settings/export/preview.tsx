@@ -15,24 +15,24 @@ export function ExportPreview() {
   }, [setIsCacheInitialized]);
 
   return (
-    <div className="relative aspect-square w-full rounded-lg overflow-hidden border border-border/50 bg-muted/20 group/preview flex items-center justify-center animate-in fade-in zoom-in-95 duration-200">
+    <div className="border-border/50 bg-muted/20 group/preview animate-in fade-in zoom-in-95 relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-lg border duration-200">
       {exportUrl ? (
         <>
           <img
             src={exportUrl}
             alt="Tree Preview"
-            className="w-full h-full object-contain"
+            className="h-full w-full object-contain"
           />
-          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/preview:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-            <span className="text-[10px] font-bold text-white uppercase tracking-widest">
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 transition-opacity group-hover/preview:opacity-100">
+            <span className="text-[10px] font-bold tracking-widest text-white uppercase">
               Preview
             </span>
           </div>
         </>
       ) : (
-        <div className="flex flex-col items-center gap-2 text-muted-foreground">
+        <div className="text-muted-foreground flex flex-col items-center gap-2">
           <Loader2 className="size-6 animate-spin opacity-50" />
-          <span className="text-[10px] font-bold uppercase tracking-widest">
+          <span className="text-[10px] font-bold tracking-widest uppercase">
             Generating...
           </span>
         </div>

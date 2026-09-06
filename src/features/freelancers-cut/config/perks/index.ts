@@ -7,4 +7,3 @@ export const Perks = {
   ...minors,
   ...majors,
 } as const;
-

@@ -10,7 +10,9 @@ import { initCache } from "@/features/entry-point/config/image-cache";
 export function ExportActions() {
   const [copied, setCopied] = useState(false);
   const isCacheInitialized = useEntryPointStore((s) => s.isCacheInitialized);
-  const setIsCacheInitialized = useEntryPointStore((s) => s.setIsCacheInitialized);
+  const setIsCacheInitialized = useEntryPointStore(
+    (s) => s.setIsCacheInitialized,
+  );
 
   const unlockedNodes = useEntryPointStore((s) => s.unlockedNodes);
   const unlockedClassPerks = useEntryPointStore(selectUnlockedClassPerks);
@@ -37,24 +39,24 @@ export function ExportActions() {
       <Button
         variant="outline"
         size="sm"
-        className="h-8 text-[11px] font-bold uppercase tracking-tight"
+        className="h-8 text-[11px] font-bold tracking-tight uppercase"
         onClick={handleExport}
         disabled={!isCacheInitialized}
       >
-        <Download className="size-3 mr-1" />
+        <Download className="mr-1 size-3" />
         Save PNG
       </Button>
       <Button
         variant="outline"
         size="sm"
-        className="h-8 text-[11px] font-bold uppercase tracking-tight"
+        className="h-8 text-[11px] font-bold tracking-tight uppercase"
         onClick={handleCopy}
         disabled={!isCacheInitialized}
       >
         {copied ? (
-          <Check className="size-3 mr-1 text-green-500" />
+          <Check className="mr-1 size-3 text-green-500" />
         ) : (
-          <Copy className="size-3 mr-1" />
+          <Copy className="mr-1 size-3" />
         )}
         {copied ? "Copied!" : "Copy"}
       </Button>

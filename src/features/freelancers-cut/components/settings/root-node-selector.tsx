@@ -16,14 +16,14 @@ export default function RootNodeSelector() {
   }));
 
   return (
-    <Card className="bg-card/60 md:backdrop-blur-md border-border/50 ring-1 ring-primary/5 hover:ring-primary/10 transition-all rounded-xl shadow-md overflow-hidden">
+    <Card className="bg-card/60 border-border/50 ring-primary/5 hover:ring-primary/10 overflow-hidden rounded-xl shadow-md ring-1 transition-all md:backdrop-blur-md">
       <CardContent className="px-4">
         <div className="flex flex-col gap-3">
           <div className="flex items-center gap-2">
-            <div className="p-1 rounded bg-primary/10">
-              <GitBranch className="size-4 text-primary" />
+            <div className="bg-primary/10 rounded p-1">
+              <GitBranch className="text-primary size-4" />
             </div>
-            <span className="text-[13px] font-bold text-foreground/90">
+            <span className="text-foreground/90 text-[13px] font-bold">
               Root Node
             </span>
           </div>
@@ -34,15 +34,15 @@ export default function RootNodeSelector() {
                 key={node.id}
                 onClick={() => setRootNode(node.id)}
                 className={cn(
-                  "flex items-center gap-3 px-3 py-2 rounded-lg transition-all border text-left",
+                  "flex items-center gap-3 rounded-lg border px-3 py-2 text-left transition-all",
                   rootNode === node.id
-                    ? "bg-primary/10 border-primary/30 ring-1 ring-primary/20"
-                    : "bg-muted/30 border-transparent hover:bg-muted/50",
+                    ? "bg-primary/10 border-primary/30 ring-primary/20 ring-1"
+                    : "bg-muted/30 hover:bg-muted/50 border-transparent",
                 )}
               >
                 <div
                   className={cn(
-                    "size-8 rounded-full flex items-center justify-center shrink-0",
+                    "flex size-8 shrink-0 items-center justify-center rounded-full",
                     rootNode === node.id ? "bg-primary/20" : "bg-muted",
                   )}
                 >
@@ -51,13 +51,13 @@ export default function RootNodeSelector() {
                     alt={node.name}
                     className={cn(
                       "size-5 rounded-full",
-                      rootNode !== node.id && "grayscale opacity-50",
+                      rootNode !== node.id && "opacity-50 grayscale",
                     )}
                   />
                 </div>
                 <span
                   className={cn(
-                    "text-[12px] font-bold flex-1 truncate",
+                    "flex-1 truncate text-[12px] font-bold",
                     rootNode === node.id
                       ? "text-foreground"
                       : "text-muted-foreground",

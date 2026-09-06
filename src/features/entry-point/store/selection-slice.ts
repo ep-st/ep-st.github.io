@@ -20,4 +20,3 @@ export const createSelectionSlice: StateCreator<
       state.hoveredNode = node;
     }),
 });
-

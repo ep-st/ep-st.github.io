@@ -1,7 +1,9 @@
 import { PERK_ENTRIES } from "@/features/freelancers-cut/config/entries";
 import { PerkType, type Perk } from "@/features/freelancers-cut/types";
 
-export function getUnlockedMinors(unlockedNodes: Iterable<string>): Map<Perk, number> {
+export function getUnlockedMinors(
+  unlockedNodes: Iterable<string>,
+): Map<Perk, number> {
   const map = new Map<Perk, number>();
   for (const node of unlockedNodes) {
     const entry = PERK_ENTRIES[node];

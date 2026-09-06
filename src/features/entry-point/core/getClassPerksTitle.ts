@@ -23,4 +23,3 @@ export function getClassPerksTitle(classes: Set<Perk>): string {
 
   return role?.[0] ?? "Unknown";
 }
-

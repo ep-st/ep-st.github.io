@@ -15,7 +15,7 @@ export function ExportControls() {
       <button
         onClick={() => setShowPreview(!showPreview)}
         className={cn(
-          "p-1 rounded-md transition-all border border-border/50 bg-muted/30",
+          "border-border/50 bg-muted/30 rounded-md border p-1 transition-all",
           showPreview
             ? "text-primary hover:bg-muted/50"
             : "text-muted-foreground hover:text-foreground hover:bg-muted/50",
@@ -32,7 +32,7 @@ export function ExportControls() {
       <button
         onClick={() => setWithMajorPerks(!withMajorPerks)}
         className={cn(
-          "p-1 rounded-md transition-all border border-border/50 bg-muted/30",
+          "border-border/50 bg-muted/30 rounded-md border p-1 transition-all",
           withMajorPerks
             ? "text-primary hover:bg-muted/50"
             : "text-muted-foreground hover:text-foreground hover:bg-muted/50",
@@ -42,13 +42,13 @@ export function ExportControls() {
         <List className="size-3" />
       </button>
 
-      <div className="flex items-center gap-1 bg-muted/50 p-0.5 rounded-lg border border-border/50">
+      <div className="bg-muted/50 border-border/50 flex items-center gap-1 rounded-lg border p-0.5">
         <button
           onClick={() => setWithBackground(false)}
           className={cn(
-            "p-1 rounded-md transition-all",
+            "rounded-md p-1 transition-all",
             !withBackground
-              ? "bg-background shadow-sm text-primary"
+              ? "bg-background text-primary shadow-sm"
               : "text-muted-foreground hover:text-foreground",
           )}
           title="Transparent"
@@ -58,9 +58,9 @@ export function ExportControls() {
         <button
           onClick={() => setWithBackground(true)}
           className={cn(
-            "p-1 rounded-md transition-all",
+            "rounded-md p-1 transition-all",
             withBackground
-              ? "bg-background shadow-sm text-primary"
+              ? "bg-background text-primary shadow-sm"
               : "text-muted-foreground hover:text-foreground",
           )}
           title="With Background"

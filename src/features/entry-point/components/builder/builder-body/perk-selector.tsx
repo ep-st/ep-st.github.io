@@ -122,7 +122,7 @@ export function PerkSelector() {
                       className="size-4 shrink-0 object-contain"
                     />
                     {perk.name}
-                    <span className="ml-auto text-[11px] text-muted-foreground">
+                    <span className="text-muted-foreground ml-auto text-[11px]">
                       ×{maxCounts.get(perk.name)}
                     </span>
                   </ComboboxItem>

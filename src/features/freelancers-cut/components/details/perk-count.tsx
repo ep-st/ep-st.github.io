@@ -7,9 +7,9 @@ export default function PerkCount() {
   const unlockedPerkCount = useFreelancersCutStore((s) => s.unlockedNodes.size);
 
   return (
-    <Card className="w-full p-3 transition-all duration-300 bg-card/60 md:backdrop-blur-md border-border/50 ring-1 ring-primary/5 hover:ring-primary/10 rounded-xl shadow-lg">
-      <CardHeader className="flex flex-row items-center gap-2 px-1 py-0 select-none justify-between">
-        <div className="font-bold text-[15px] tracking-tight text-foreground/90">
+    <Card className="bg-card/60 border-border/50 ring-primary/5 hover:ring-primary/10 w-full rounded-xl p-3 shadow-lg ring-1 transition-all duration-300 md:backdrop-blur-md">
+      <CardHeader className="flex flex-row items-center justify-between gap-2 px-1 py-0 select-none">
+        <div className="text-foreground/90 text-[15px] font-bold tracking-tight">
           Perks:
         </div>
         <div

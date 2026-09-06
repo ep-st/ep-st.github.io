@@ -28,4 +28,3 @@ export enum StarterClass {
   DemolitionsExpert = "2",
   Prodigy = "3",
 }
-

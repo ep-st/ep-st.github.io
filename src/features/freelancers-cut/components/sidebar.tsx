@@ -10,27 +10,27 @@ import { LayoutGrid, Settings2 } from "lucide-react";
 
 export default function Sidebar() {
   return (
-    <div className="mx-auto w-full h-full flex flex-col">
+    <div className="mx-auto flex h-full w-full flex-col">
       <Tabs
         defaultValue="details"
-        className="flex-1 flex flex-col gap-3 w-full h-full min-h-0"
+        className="flex h-full min-h-0 w-full flex-1 flex-col gap-3"
       >
-        <TabsList className="bg-muted/40 md:backdrop-blur-md gap-1 border-border/50 border w-full p-1 h-10 xl:h-12 rounded-xl shadow-inner shrink-0">
+        <TabsList className="bg-muted/40 border-border/50 h-10 w-full shrink-0 gap-1 rounded-xl border p-1 shadow-inner md:backdrop-blur-md xl:h-12">
           <TabsTrigger
             key={"details"}
             value={"details"}
-            className="rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md transition-all duration-300 font-bold text-sm"
+            className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-lg text-sm font-bold transition-all duration-300 data-[state=active]:shadow-md"
           >
-            <LayoutGrid className="size-4 mr-2" />
+            <LayoutGrid className="mr-2 size-4" />
             Details
           </TabsTrigger>
 
           <TabsTrigger
             key={"settings"}
             value={"settings"}
-            className="rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md transition-all duration-300 font-bold text-sm"
+            className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground rounded-lg text-sm font-bold transition-all duration-300 data-[state=active]:shadow-md"
           >
-            <Settings2 className="size-4 mr-2" />
+            <Settings2 className="mr-2 size-4" />
             Settings
           </TabsTrigger>
         </TabsList>
@@ -38,7 +38,7 @@ export default function Sidebar() {
         <TabsContent
           key={"details"}
           value={"details"}
-          className="flex-1 outline-none overflow-y-auto scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden min-h-0"
+          className="min-h-0 flex-1 scrollbar-none overflow-y-auto outline-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           <div className="h-full">
             <Details />
@@ -48,7 +48,7 @@ export default function Sidebar() {
         <TabsContent
           key={"settings"}
           value={"settings"}
-          className="flex-1 outline-none overflow-y-auto scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden min-h-0"
+          className="min-h-0 flex-1 scrollbar-none overflow-y-auto outline-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
         >
           <div className="h-full">
             <Settings />

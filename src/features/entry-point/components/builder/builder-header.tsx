@@ -3,14 +3,14 @@ import { Wrench, X } from "lucide-react";
 
 export function BuilderHeader() {
   return (
-    <Card className="bg-card/60 md:backdrop-blur-md border-border/50 ring-1 ring-primary/5 rounded-xl shadow-md overflow-hidden shrink-0">
-      <CardHeader className="px-4 py-0 select-none flex flex-row items-center justify-between gap-3">
-        <div className="flex items-center gap-2 min-w-0">
-          <div className="p-1 rounded bg-primary/10 shrink-0">
-            <Wrench className="size-4 text-primary" />
+    <Card className="bg-card/60 border-border/50 ring-primary/5 shrink-0 overflow-hidden rounded-xl shadow-md ring-1 md:backdrop-blur-md">
+      <CardHeader className="flex flex-row items-center justify-between gap-3 px-4 py-0 select-none">
+        <div className="flex min-w-0 items-center gap-2">
+          <div className="bg-primary/10 shrink-0 rounded p-1">
+            <Wrench className="text-primary size-4" />
           </div>
 
-          <CardTitle className="text-[15px] leading-none font-bold text-foreground/90 ">
+          <CardTitle className="text-foreground/90 text-[15px] leading-none font-bold">
             Path Builder
           </CardTitle>
         </div>

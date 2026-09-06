@@ -6,23 +6,23 @@ import { Card } from "@/shared/components/ui/card";
 
 export default function FreelancersCut() {
   return (
-    <div className="xl:h-screen xl:w-screen flex flex-col items-center justify-center overflow-hidden bg-background selection:bg-primary/30">
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.05),transparent_50%)] pointer-events-none" />
+    <div className="bg-background selection:bg-primary/30 flex flex-col items-center justify-center overflow-hidden xl:h-screen xl:w-screen">
+      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(var(--primary-rgb),0.05),transparent_50%)]" />
       <URLSync />
 
       <Header title={"Entry Point: Freelancer's Cut Skill Tree Editor"} />
 
-      <main className="flex-1 w-full mx-auto flex p-4 xl:p-10 gap-10 xl:flex-row flex-col items-center justify-center overflow-hidden min-h-0 relative z-10">
-        <Card className="lg:w-1/2 max-h-full w-full aspect-square flex bg-card/60 md:backdrop-blur-md rounded-2xl overflow-hidden group ring-1 ring-primary/10 transition-all duration-500 hover:ring-primary/20">
+      <main className="relative z-10 mx-auto flex min-h-0 w-full flex-1 flex-col items-center justify-center gap-10 overflow-hidden p-4 xl:flex-row xl:p-10">
+        <Card className="bg-card/60 group ring-primary/10 hover:ring-primary/20 flex aspect-square max-h-full w-full overflow-hidden rounded-2xl ring-1 transition-all duration-500 md:backdrop-blur-md lg:w-1/2">
           <Editor />
         </Card>
 
-        <div className="flex-1 h-full min-w-0 overflow-hidden flex flex-col w-full lg:max-w-220">
+        <div className="flex h-full w-full min-w-0 flex-1 flex-col overflow-hidden lg:max-w-220">
           <Sidebar />
         </div>
       </main>
 
-      <footer className="h-[4vh] w-full border-t border-border/40 bg-muted/10 shrink-0 flex items-center justify-between px-8 z-50" />
+      <footer className="border-border/40 bg-muted/10 z-50 flex h-[4vh] w-full shrink-0 items-center justify-between border-t px-8" />
     </div>
   );
 }

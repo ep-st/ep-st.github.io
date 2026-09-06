@@ -4,7 +4,7 @@ import ExportSettings from "./export";
 
 export default function Settings() {
   return (
-    <div className="flex flex-col gap-1.5 animate-in fade-in slide-in-from-bottom-2 duration-500 pb-10">
+    <div className="animate-in fade-in slide-in-from-bottom-2 flex flex-col gap-1.5 pb-10 duration-500">
       <RootNodeSelector />
       <PerkLimit />
       <ExportSettings />

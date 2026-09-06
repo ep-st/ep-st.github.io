@@ -32,4 +32,3 @@ export function decode(bitmaskStr: string): Set<string> {
 
   return set;
 }
-

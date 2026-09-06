@@ -26,4 +26,3 @@ export function setAbility(array: string[]): Description {
     return array[Math.min(level, array.length - 1)];
   };
 }
-

@@ -9,15 +9,15 @@ export default function ExportSettings() {
   const showPreview = useFreelancersCutStore((s) => s.showPreview);
 
   return (
-    <Card className="bg-card/60 md:backdrop-blur-md border-border/50 ring-1 ring-primary/5 hover:ring-primary/10 transition-all rounded-xl shadow-md overflow-hidden py-4">
+    <Card className="bg-card/60 border-border/50 ring-primary/5 hover:ring-primary/10 overflow-hidden rounded-xl py-4 shadow-md ring-1 transition-all md:backdrop-blur-md">
       <CardContent className="px-4">
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="p-1 rounded bg-primary/10">
-                <Download className="size-4 text-primary" />
+              <div className="bg-primary/10 rounded p-1">
+                <Download className="text-primary size-4" />
               </div>
-              <span className="text-[13px] font-bold text-foreground/90">
+              <span className="text-foreground/90 text-[13px] font-bold">
                 Export
               </span>
             </div>

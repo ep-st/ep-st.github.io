@@ -173,4 +173,3 @@ export const PERK_ENTRIES: { [key: string]: PerkEntry } = {
   "143": { perk: Perks.Triangulation, position: { x: 510, y: 385 } },
   "144": { perk: Perks.Triangulation, position: { x: 390, y: 615 } },
 };
-

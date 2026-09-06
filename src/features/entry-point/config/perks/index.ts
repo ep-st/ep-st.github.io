@@ -9,4 +9,3 @@ export const Perks = {
   ...uniques,
   ...minors,
 } as const;
-

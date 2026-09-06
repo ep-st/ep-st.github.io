@@ -4,4 +4,3 @@ export function withAdjacency<Args extends unknown[], R, L>(
 ) {
   return (...args: Args): R => fn(adjacency_list, ...args);
 }
-

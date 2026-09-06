@@ -6,14 +6,14 @@ import WeaponMasteriesDetails from "./weapon-masteries";
 
 export default function Details() {
   return (
-    <div className="flex w-full lg:flex-row flex-col items-start gap-3 p-1 2xl:gap-4">
-      <div className="lg:w-7/10 w-full flex flex-col gap-4">
+    <div className="flex w-full flex-col items-start gap-3 p-1 lg:flex-row 2xl:gap-4">
+      <div className="flex w-full flex-col gap-4 lg:w-7/10">
         <ClassDetails />
         <MinorPerksDetails />
         <WeaponMasteriesDetails />
       </div>
 
-      <div className="w-full flex flex-col flex-1 gap-4">
+      <div className="flex w-full flex-1 flex-col gap-4">
         <PerkCount />
         <UniquePerksDetails />
       </div>

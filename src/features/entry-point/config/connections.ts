@@ -329,4 +329,3 @@ export const CONNECTIONS: [string, string][] = [
   ["23", "111"],
   ["110", "111"],
 ];
-

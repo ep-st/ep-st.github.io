@@ -267,4 +267,3 @@ export const PERK_ENTRIES: {[key: string] : PerkEntry} = {
   "238": { perk: Perks.SniperTraining, coordinates: { x: 608, y: 135, z: 8 } },
   "239": { perk: Perks.SniperTraining, coordinates: { x: 634, y: 146, z: 8 } },
 } as const;
-

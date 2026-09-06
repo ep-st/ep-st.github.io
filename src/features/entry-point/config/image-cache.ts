@@ -8,4 +8,3 @@ export async function initCache() {
   }
   return IMAGE_CACHE;
 }
-
